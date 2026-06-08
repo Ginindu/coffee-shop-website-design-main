@@ -34,8 +34,57 @@
             <a href="#book">book</a>
         </nav>
 
+        <div class="header-actions">
+            <div id="theme-btn" class="fas fa-moon" title="Toggle theme"></div>
+            <div id="cart-btn" class="cart-btn" title="View cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge">0</span>
+            </div>
+        </div>
+
         <a href="#" class="btn">book a table</a>
     </header>
+
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <aside id="cart-drawer" class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Your Order</h3>
+            <button id="close-cart" class="close-drawer" title="Close cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="cart-items-container" class="cart-items-container"></div>
+        <div class="cart-drawer-footer">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span>$<span id="cart-subtotal-price">0.00</span></span>
+            </div>
+            <button id="checkout-btn" class="btn checkout-btn">checkout</button>
+        </div>
+    </aside>
+
+    <div id="global-modal-overlay" class="modal-overlay">
+        <div id="modal-content-container" class="modal-content"></div>
+    </div>
+
+    <div id="chatbot-bubble" class="chatbot-bubble" title="Open conversation">
+        <i class="fas fa-comments"></i>
+        <span id="chatbot-unread">!</span>
+    </div>
+    <div id="chatbot-panel" class="chatbot-panel">
+        <div class="chatbot-header">
+            <h4>Bean — Coffee Bot</h4>
+            <button id="close-chat" class="close-chat" title="Close chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chatbot-messages-container" class="chatbot-messages-container"></div>
+        <div id="chat-options-chips" class="chat-options-chips">
+            <button class="chat-option-btn" data-action="recommend">recommend</button>
+            <button class="chat-option-btn" data-action="faq">faq</button>
+            <button class="chat-option-btn" data-action="customizer">customizer</button>
+        </div>
+        <div class="chatbot-input-row">
+            <input id="chat-user-input" type="text" placeholder="Ask Bean anything...">
+            <button id="send-chat-btn" class="btn">send</button>
+        </div>
+    </div>
 
     <!-- HOME -->
     <section class="home" id="home">
@@ -92,60 +141,79 @@
 <section class="menu" id="menu">
     <h1 class="heading">our menu <span>popular menu</span></h1>
 
+    <div class="menu-filters">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="menu-search" placeholder="Search menu items...">
+        </div>
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">all</button>
+            <button class="filter-tab" data-filter="coffee">coffee</button>
+            <button class="filter-tab" data-filter="espresso">espresso</button>
+            <button class="filter-tab" data-filter="special">special</button>
+        </div>
+    </div>
+
     <div class="box-container">
-        <a href="#" class="box">
+        <div class="box" data-id="menu-1" data-name="Espresso" data-price="4.50" data-category="espresso">
             <img src="image/menu-1.png" alt="Espresso">
             <div class="content">
                 <h3>Espresso</h3>
                 <p>A bold, concentrated shot of pure coffee excellence with a rich crema finish.</p>
                 <span>LKR 450.00</span>
+                <button class="btn add-to-cart-btn">add to cart</button>
             </div>
-        </a>
+        </div>
 
-        <a href="#" class="box">
+        <div class="box" data-id="menu-2" data-name="Americano" data-price="5.30" data-category="coffee">
             <img src="image/menu-2.png" alt="Americano">
             <div class="content">
                 <h3>Americano</h3>
                 <p>Smooth, rich espresso shots balanced perfectly with hot water for a classic taste.</p>
                 <span>LKR 530.00</span>
+                <button class="btn add-to-cart-btn">add to cart</button>
             </div>
-        </a>
+        </div>
 
-        <a href="#" class="box">
+        <div class="box" data-id="menu-3" data-name="Cappuccino" data-price="6.20" data-category="coffee">
             <img src="image/menu-3.png" alt="Cappuccino">
             <div class="content">
                 <h3>Cappuccino</h3>
                 <p>A harmonious blend of deep espresso, velvety steamed milk, and a thick layer of foam.</p>
                 <span>LKR 620.00</span>
+                <button class="btn add-to-cart-btn">add to cart</button>
             </div>
-        </a>
+        </div>
 
-        <a href="#" class="box">
+        <div class="box" data-id="menu-4" data-name="Cafe Latte" data-price="6.50" data-category="coffee">
             <img src="image/menu-4.png" alt="Cafe Latte">
             <div class="content">
                 <h3>Cafe Latte</h3>
                 <p>Light and creamy espresso combined with plenty of steamed milk and a touch of froth.</p>
                 <span>LKR 650.00</span>
+                <button class="btn add-to-cart-btn">add to cart</button>
             </div>
-        </a>
+        </div>
 
-        <a href="#" class="box">
+        <div class="box" data-id="menu-5" data-name="Flat White" data-price="7.00" data-category="coffee">
             <img src="image/menu-5.png" alt="Flat White">
             <div class="content">
                 <h3>Flat White</h3>
                 <p>An intense hit of espresso blended perfectly with velvety micro-foam milk.</p>
                 <span>LKR 700.00</span>
+                <button class="btn add-to-cart-btn">add to cart</button>
             </div>
-        </a>
+        </div>
 
-        <a href="#" class="box">
+        <div class="box" data-id="menu-6" data-name="Cafe Mocha" data-price="7.50" data-category="special">
             <img src="image/menu-6.png" alt="Cafe Mocha">
             <div class="content">
                 <h3>Cafe Mocha</h3>
                 <p>The ultimate indulgence featuring rich espresso, steamed milk, and decadent chocolate syrup.</p>
                 <span>LKR 750.00</span>
+                <button class="btn add-to-cart-btn">add to cart</button>
             </div>
-        </a>
+        </div>
     </div>
 </section>
 
@@ -166,8 +234,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, earum quis dolorem quaerat tenetur
-                        illum.</p>
+                    <p>“Finally, a place that takes espresso seriously!”.</p>
                     <h3>john deo</h3>
                     <span>satisfied client</span>
                 </div>
@@ -183,9 +250,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum optio quasi ut, illo ipsam
-                        assumenda.</p>
-                    <h3>john deo</h3>
+                    <p>“A hidden gem with the best aesthetics.”</p>
+                    <h3>Ginindu</h3>
                     <span>satisfied client</span>
                 </div>
 
@@ -200,9 +266,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius asperiores aliquam hic quis!
-                        Eligendi, aliquam.</p>
-                    <h3>john deo</h3>
+                    <p>“Clean, aesthetic, and a consistently perfect brew. Highly recommend the cold brew.”.</p>
+                    <h3>chamath fernando</h3>
                     <span>satisfied client</span>
                 </div>
 
@@ -217,9 +282,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi modi perspiciatis distinctio
-                        velit aliquid a.</p>
-                    <h3>john deo</h3>
+                    <p>“Incredible coffee, lovely staff, and the house-made syrups are a game-changer!”.</p>
+                    <h3>yehen akarsha</h3>
                     <span>satisfied client</span>
                 </div>
             </div>
@@ -231,11 +295,28 @@
     <section class="book" id="book">
         <h1 class="heading">booking <span>reserve a table</span></h1>
 
-        <form action="">
-            <input type="text" placeholder="Name" class="box">
-            <input type="email" placeholder="Email" class="box">
-            <input type="number" placeholder="Number" class="box">
-            <textarea name="" placeholder="Message" class="box" id="" cols="30" rows="10"></textarea>
+        <form id="booking-form">
+            <div class="book-grid">
+                <input id="book-name" type="text" placeholder="Name" class="box">
+                <input id="book-guests" type="number" placeholder="Guests" class="box" min="1" value="1">
+                <select id="book-zone" class="box" title="Select zone">
+                    <option value="">Select zone</option>
+                    <option value="window">Window View</option>
+                    <option value="cozy">Cozy Fireplace</option>
+                    <option value="bar">Bar Counter</option>
+                    <option value="patio">Outdoor Patio</option>
+                </select>
+                <input id="book-date" type="date" class="box" title="Choose date">
+                <input id="book-time" type="time" class="box" title="Choose time">
+                <input id="book-phone" type="tel" placeholder="Phone" class="box">
+            </div>
+            <input type="hidden" id="selected-table-id">
+
+            <div id="seating-map-section" class="seating-map-section">
+                <h3>Select your table</h3>
+                <div id="seating-grid" class="seating-grid"></div>
+            </div>
+
             <input type="submit" value="send message" class="btn">
         </form>
     </section>

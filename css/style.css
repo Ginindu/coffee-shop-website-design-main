@@ -143,6 +143,340 @@ section {
     display: none;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#theme-btn,
+.cart-btn {
+    width: 4rem;
+    height: 4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--border);
+    border-radius: 50%;
+    color: var(--main-color);
+    background: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+}
+
+#theme-btn:hover,
+.cart-btn:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    min-width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-color);
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.cart-overlay,
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 900;
+}
+
+.cart-overlay.active,
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -36rem;
+    width: 36rem;
+    height: 100%;
+    background: var(--bg-color);
+    box-shadow: -1rem 0 2rem rgba(0, 0, 0, 0.18);
+    padding: 2rem;
+    transition: right 0.35s ease;
+    z-index: 950;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cart-drawer.active {
+    right: 0;
+}
+
+.cart-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.close-drawer,
+.close-chat {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+.cart-items-container {
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    gap: 1rem;
+}
+
+.cart-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cart-drawer-footer .subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    color: var(--main-color);
+}
+
+.checkout-btn {
+    width: 100%;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 55rem;
+    width: calc(100% - 3rem);
+    margin: 6rem auto;
+    background: var(--bg-color);
+    border-radius: var(--border-radius-hover);
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+}
+
+.chatbot-bubble {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background: var(--main-color);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#chatbot-unread {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: white;
+}
+
+.chatbot-panel {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 2.5rem;
+    width: 30rem;
+    max-height: 75vh;
+    background: var(--bg-color);
+    border: var(--border);
+    border-radius: var(--border-radius-hover);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.chatbot-panel.active {
+    display: flex;
+}
+
+.chatbot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.chatbot-messages-container {
+    padding: 1.5rem;
+    flex: 1;
+    overflow-y: auto;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-options-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    padding: 0 1.5rem 1rem;
+}
+
+.chat-option-btn {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1.2rem;
+    background: none;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.chatbot-input-row {
+    display: flex;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.chatbot-input-row input {
+    flex: 1;
+    padding: 1rem 1.2rem;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    font-size: 1.5rem;
+    color: var(--main-color);
+    background: none;
+}
+
+.menu-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.search-box {
+    position: relative;
+    flex: 1 1 28rem;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 1.2rem 1.2rem 1.2rem 4rem;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    font-size: 1.6rem;
+    color: var(--main-color);
+    background: none;
+}
+
+.filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-tab {
+    padding: 1rem 1.5rem;
+    border: var(--border);
+    border-radius: var(--border-radius);
+    background: none;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.filter-tab.active,
+.filter-tab:hover {
+    background: rgba(196, 140, 93, 0.1);
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
+}
+
+.seating-map-section {
+    margin-top: 1.5rem;
+    display: none;
+}
+
+.seating-map-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.seating-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 1rem;
+}
+
+.dining-table {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.dining-table.available:hover {
+    transform: translateY(-0.3rem);
+}
+
+.dining-table.occupied {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.dining-table.selected {
+    border-color: var(--accent-color);
+    background: rgba(199, 140, 93, 0.1);
+}
+
 /* HOME */
 
 .home {

@@ -294,6 +294,7 @@ const syrupOptions = document.querySelectorAll('#syrup-options .option-card');
 const toppingOptions = document.querySelectorAll('#topping-options .option-card');
 const customPriceText = document.querySelector('#custom-coffee-price');
 const addCustomBrewBtn = document.querySelector('#add-custom-brew-btn');
+const customizerEnabled = customPriceText !== null && addCustomBrewBtn !== null;
 
 // Visual cup elements
 const visualLiquid = document.querySelector('#visual-liquid');
@@ -309,78 +310,10 @@ let selection = {
     toppings: {}
 };
 
-// Size controls click listener
-sizeOptions.forEach(card => {
-    card.addEventListener('click', () => {
-        sizeOptions.forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-        
-        selection.size.value = card.getAttribute('data-value');
-        selection.size.price = parseFloat(card.getAttribute('data-price'));
-        
-        updateStudio();
-    });
-});
-
-// Base controls click listener
-baseOptions.forEach(card => {
-    card.addEventListener('click', () => {
-        baseOptions.forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-        
-        selection.base.value = card.getAttribute('data-value');
-        selection.base.color = card.getAttribute('data-color');
-        selection.base.hasmilk = card.getAttribute('data-hasmilk') === 'true';
-        
-        updateStudio();
-    });
-});
-
-// Milk controls click listener
-milkOptions.forEach(card => {
-    card.addEventListener('click', () => {
-        milkOptions.forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-        
-        selection.milk.value = card.getAttribute('data-value');
-        selection.milk.price = parseFloat(card.getAttribute('data-price'));
-        
-        updateStudio();
-    });
-});
-
-// Syrup controls click listener
-syrupOptions.forEach(card => {
-    card.addEventListener('click', () => {
-        syrupOptions.forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-        
-        selection.syrup.value = card.getAttribute('data-value');
-        selection.syrup.price = parseFloat(card.getAttribute('data-price'));
-        
-        updateStudio();
-    });
-});
-
-// Topping controls toggle listener
-toppingOptions.forEach(card => {
-    card.addEventListener('click', () => {
-        card.classList.toggle('active');
-        const value = card.getAttribute('data-value');
-        const price = parseFloat(card.getAttribute('data-price'));
-
-        if (card.classList.contains('active')) {
-            selection.toppings[value] = price;
-        } else {
-            delete selection.toppings[value];
-        }
-        
-        updateStudio();
-    });
-});
-
 // Recalculate price and update vector CSS coffee graphics
 function updateStudio() {
+    if (!customizerEnabled) return;
+
     // 1. Calculate price
     let totalPrice = selection.size.price + selection.milk.price + selection.syrup.price;
     for (const topping in selection.toppings) {
@@ -426,43 +359,112 @@ function updateStudio() {
     }
 }
 
-// Add Custom Craft Coffee item to Cart
-addCustomBrewBtn.addEventListener('click', (e) => {
-    // Generate beautiful custom recipe string
-    let ingredients = [];
-    ingredients.push(`${selection.size.value} base`);
-    ingredients.push(selection.base.value);
-    if (selection.milk.value !== 'none') ingredients.push(`${selection.milk.value.replace('-', ' ')}`);
-    if (selection.syrup.value !== 'none') ingredients.push(`${selection.syrup.value} syrup`);
-    
-    let toppingsCount = 0;
-    for (const topping in selection.toppings) {
-        ingredients.push(topping.replace('-', ' '));
-        toppingsCount++;
-    }
+if (customizerEnabled) {
+    // Size controls click listener
+    sizeOptions.forEach(card => {
+        card.addEventListener('click', () => {
+            sizeOptions.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
 
-    const recipeStr = ingredients.join(' • ');
-    const customName = `Custom ${selection.size.value} ${selection.base.value}`;
-    const finalPrice = parseFloat(customPriceText.textContent);
-    const customId = `custom-${Date.now()}`;
+            selection.size.value = card.getAttribute('data-value');
+            selection.size.price = parseFloat(card.getAttribute('data-price'));
 
-    // Add to cart array
-    cart.push({
-        id: customId,
-        name: customName,
-        price: finalPrice,
-        image: 'image/menu-3.png', // Cup-like visual reference
-        quantity: 1,
-        customization: recipeStr
+            updateStudio();
+        });
     });
 
-    saveAndRenderCart();
+    // Base controls click listener
+    baseOptions.forEach(card => {
+        card.addEventListener('click', () => {
+            baseOptions.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
 
-    // Trigger visual cart open and fly animation
-    const container = document.querySelector('.coffee-cup-container');
-    triggerFlyAnimation(container.querySelector('.cup-body'), e.clientX, e.clientY);
-    setTimeout(() => { toggleCartDrawer(); }, 700);
-});
+            selection.base.value = card.getAttribute('data-value');
+            selection.base.color = card.getAttribute('data-color');
+            selection.base.hasmilk = card.getAttribute('data-hasmilk') === 'true';
+
+            updateStudio();
+        });
+    });
+
+    // Milk controls click listener
+    milkOptions.forEach(card => {
+        card.addEventListener('click', () => {
+            milkOptions.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            selection.milk.value = card.getAttribute('data-value');
+            selection.milk.price = parseFloat(card.getAttribute('data-price'));
+
+            updateStudio();
+        });
+    });
+
+    // Syrup controls click listener
+    syrupOptions.forEach(card => {
+        card.addEventListener('click', () => {
+            syrupOptions.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            selection.syrup.value = card.getAttribute('data-value');
+            selection.syrup.price = parseFloat(card.getAttribute('data-price'));
+
+            updateStudio();
+        });
+    });
+
+    // Topping controls toggle listener
+    toppingOptions.forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('active');
+            const value = card.getAttribute('data-value');
+            const price = parseFloat(card.getAttribute('data-price'));
+
+            if (card.classList.contains('active')) {
+                selection.toppings[value] = price;
+            } else {
+                delete selection.toppings[value];
+            }
+
+            updateStudio();
+        });
+    });
+
+    // Add Custom Craft Coffee item to Cart
+    addCustomBrewBtn.addEventListener('click', (e) => {
+        let ingredients = [];
+        ingredients.push(`${selection.size.value} base`);
+        ingredients.push(selection.base.value);
+        if (selection.milk.value !== 'none') ingredients.push(`${selection.milk.value.replace('-', ' ')}`);
+        if (selection.syrup.value !== 'none') ingredients.push(`${selection.syrup.value} syrup`);
+
+        for (const topping in selection.toppings) {
+            ingredients.push(topping.replace('-', ' '));
+        }
+
+        const recipeStr = ingredients.join(' • ');
+        const customName = `Custom ${selection.size.value} ${selection.base.value}`;
+        const finalPrice = parseFloat(customPriceText.textContent);
+        const customId = `custom-${Date.now()}`;
+
+        cart.push({
+            id: customId,
+            name: customName,
+            price: finalPrice,
+            image: 'image/menu-3.png', // Cup-like visual reference
+            quantity: 1,
+            customization: recipeStr
+        });
+
+        saveAndRenderCart();
+
+        const container = document.querySelector('.coffee-cup-container');
+        if (container) {
+            triggerFlyAnimation(container.querySelector('.cup-body'), e.clientX, e.clientY);
+        }
+        setTimeout(() => { toggleCartDrawer(); }, 700);
+    });
+}
 
 
 // ==========================================
